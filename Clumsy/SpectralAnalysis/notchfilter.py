@@ -1,7 +1,7 @@
 from mne.filter import notch_filter as _notch_filter
 from ptsa.data.common import get_axis_index
 from ptsa.data.timeseries import TimeSeries
-from CML.SpectralAnalysis.rollingfunctions import reorder_dims
+from Clumsy.SpectralAnalysis.rollingfunctions import reorder_dims
 
 import numpy as np
 

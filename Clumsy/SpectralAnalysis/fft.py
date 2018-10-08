@@ -2,7 +2,7 @@ import numpy as np
 from scipy import signal
 from ptsa.data.common import get_axis_index
 from ptsa.data.timeseries import TimeSeries
-
+from Clumsy.timeseriesLF import TimeSeriesLF
 __all__ = ['psd']
 
 def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, filtlen=1.):
@@ -49,7 +49,8 @@ def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, f
     This is just a wrapper for timeseries object's around Voytek lab's neurodsp See:
     https://github.com/voytekresearch/neurodsp
     """
-    is_timeseries = True if type(x) == TimeSeries else False
+    #is_timeseries = True if type(x) == TimeSeries else False
+    is_timeseries = True if issubclass(type(x), TimeSeries) else False
     if (Fs is None and is_timeseries):
         Fs = float(x.samplerate.data)
 
@@ -94,7 +95,7 @@ def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, f
         coords['frequency'] = freq
         dims = shell.dims + ('frequency',)
         data = np.expand_dims(Pxx, axis=get_axis_index(shell, 'time'))
-        powers_ts = TimeSeries(data=data, dims=dims, coords=coords)
+        powers_ts = TimeSeriesLF(data=data, dims=dims, coords=coords)
         return powers_ts
 
     return freq, Pxx
