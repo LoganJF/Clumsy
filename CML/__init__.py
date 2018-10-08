@@ -1,2 +1,2 @@
 from .timeseriesLF import *
-from .GetData import import *
+from .GetData import *
