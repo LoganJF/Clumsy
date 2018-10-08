@@ -1,6 +1,8 @@
 from ptsa.data.timeseries import TimeSeries
 from scipy.ndimage.filters import gaussian_filter1d
 
+__all__ = ['gaussian_smooth']
+
 def gaussian_smooth(data, sampling_frequency=None, sigma=0.004, axis=-1, truncate=8):
     '''1D convolution of the data with a Gaussian.
 

@@ -15,6 +15,8 @@ import numpy as np
 from IPython.display import display
 import pyedflib
 
+__all__ = ['TimeSeriesLF']
+
 class TimeSeriesLF(TimeSeries):
     """A thin wrapper around :class:`xr.DataArray` for dealing with time series
     data and timeseries.

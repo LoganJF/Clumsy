@@ -3,6 +3,13 @@ from cmlreaders import CMLReader, get_data_index
 from ptsa.data.readers import JsonIndexReader, TalReader
 import os
 
+__all__ = [
+    'get_subjects',
+    'get_sessions',
+    'get_ram_experiments',
+    'get_sub_tal'
+]
+
 def get_subjects(experiment):
     """
 

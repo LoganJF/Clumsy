@@ -32,7 +32,7 @@ def Hilbert(signal):
 
 
 def get_amplitude_envelope(signal):
-    """Returns that instantaneous amplitude evenlope of the analytic signal
+    """Returns that instantaneous amplitude envelope of the analytic signal
        from the Hilbert transformation
     ------
     INPUTS:

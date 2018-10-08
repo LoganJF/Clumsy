@@ -1,6 +1,12 @@
 import numpy as np
 from numpy import (sqrt, mean, square, floor, zeros)
 
+__all__ = [
+    'root_mean_square',
+    'RMS_amplitude_detector',
+    'RMS_amplitude_detector_fast',
+    'valid_rms_index'
+]
 def rolling_window(arr, window):
     """Returns an array of windowed sections of passed array a
 

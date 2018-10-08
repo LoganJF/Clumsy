@@ -1,6 +1,13 @@
 import numpy as np
 from ptsa.data.timeseries import TimeSeries
 
+__all__ = [
+    'reorder_dims',
+    'xarray_rolling_average',
+    'rolling_window_full',
+    'rolling_window',
+    'rolling_apply'
+]
 def reorder_dims(darray, dim1, dim2):
     """Interchange two dimensions of a DataArray in a similar way as numpy's swap_axes
 

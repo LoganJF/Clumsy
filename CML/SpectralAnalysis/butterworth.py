@@ -1,6 +1,8 @@
 from scipy.signal import (butter, sosfilt)
 from ptsa.data.timeseries import TimeSeries
 
+__all__ = ['butterworthfilter']
+
 def butterworthfilter(timeseries, freqs, kind='pass', order=5):
     """Applies a bandpass filter on the signal
 

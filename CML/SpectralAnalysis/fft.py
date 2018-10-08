@@ -3,6 +3,8 @@ from scipy import signal
 from ptsa.data.common import get_axis_index
 from ptsa.data.timeseries import TimeSeries
 
+__all__ = ['psd']
+
 def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, filtlen=1.):
     """
 
