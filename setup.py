@@ -21,7 +21,7 @@ REQUIRES_PYTHON = '>=3.6.0'
 VERSION = None
 
 # What packages are required for this module to be executed?
-REQUIRED = [
+REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas'
     # 'requests', 'maya', 'records',
 ]
 
