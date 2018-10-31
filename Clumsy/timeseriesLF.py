@@ -235,3 +235,28 @@ class TimeSeriesLF(TimeSeries):
 
         self[label].data = format_strings
         return
+
+    def filter_with(self, filter_class, **kwargs):
+        """Filter the time series data using the specified filter class.
+        Parameters
+        ----------
+        filter_class : type
+            The filter class to use.
+        kwargs
+            Keyword arguments to pass along to ``filter_class``.
+        Returns
+        -------
+        filtered : TimeSeries
+            The resulting data from the filter.
+        Raises
+        ------
+        TypeError
+            When ``filter_class`` is not a valid filter class.
+        """
+        from ptsa.data.filters.base import BaseFilter
+
+        if not issubclass(filter_class, BaseFilter):
+            raise TypeError("filter_class must be a child of BaseFilter")
+
+        filtered = filter_class(self, **kwargs).filter()
+        return filtered

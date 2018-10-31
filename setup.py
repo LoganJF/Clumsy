@@ -18,7 +18,7 @@ URL = 'https://github.com/LoganJF/Clumsy'
 EMAIL = 'loganfickling@gmail.com'
 AUTHOR = 'Logan Fickling'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = None
+VERSION = '0.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas'

@@ -49,7 +49,6 @@ def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, f
     This is just a wrapper for timeseries object's around Voytek lab's neurodsp See:
     https://github.com/voytekresearch/neurodsp
     """
-    #is_timeseries = True if type(x) == TimeSeries else False
     is_timeseries = True if issubclass(type(x), TimeSeries) else False
     if (Fs is None and is_timeseries):
         Fs = float(x.samplerate.data)
