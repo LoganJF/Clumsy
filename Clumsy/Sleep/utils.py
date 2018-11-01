@@ -18,22 +18,6 @@ from Clumsy.timeseriesLF import TimeSeriesLF, TimeSeries
 from copy import deepcopy
 from Clumsy.SpectralAnalysis import HilbertFilter
 
-def check_stability(b, a):
-    """Function that checks the stability of the denom and nom of a filter to ensure it's valid
-    ------
-    e.g.
-    b,a = butter(inputs)
-    check_stability(b,a)
-    """
-    z, p, k = tf2zpk(b, a)
-    try:
-        assert (np.max(np.abs(p)) <= 1)
-    except:
-        unstable_msg = "Filter is not stable! np.max(np.abs(p)) must be less than 1 but instead is: {} please use sos approach instead"
-        warnings.warn(unstable_msg.format(np.max(np.abs(p))), UserWarning)
-    return
-
-
 def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=-1):
     """Transform the data using different methods.
 
