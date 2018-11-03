@@ -6,7 +6,6 @@ except ImportError:
     read_raw_edf = None
 # Turn off stupid mne RunTimeWarnings for EDF+
 import warnings
-
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 from datetime import datetime, date
 from pyedflib import EdfWriter
@@ -71,12 +70,16 @@ class TimeSeriesLF(TimeSeries):
         OUTPUTS
         ts: TimeSeriesX
 
+        Parameters
+        ----------
+        filename : str
+
         """
         if read_raw_edf is None:
             raise RuntimeError("You must install mne to load from EDF")
         print('Extracting edf signal from {}'.format(filename))
         # Use MNE to read in raw edf file
-        raw_data = read_raw_edf((filename), preload=False, verbose='ERROR', stim_channel=None,
+        raw_data = read_raw_edf(filename, preload=False, verbose='ERROR', stim_channel=None,
                                 *args, **kwargs)
 
         # Handling for clinical copying bizzare filenames
@@ -132,6 +135,8 @@ class TimeSeriesLF(TimeSeries):
             ts = xr.concat(objs=ts_list, dim=dim, *args, **kwargs)
             ts['events'] = evs  # Reset the events to the correct np.recarray
             return ts
+
+        # TODO: Change to check all dims that are record arrays and do it
 
         # Try to just concat normally, if that doesn't work show them why.
         else:
@@ -212,15 +217,13 @@ class TimeSeriesLF(TimeSeries):
         """
         # Find partial matches in edf raw signals with cmlreaders channel labels
         signal_labels = np.array([label.upper() for label in signal_labels])
-        match_indx = []
+        match_index = []
         for channel in contacts_label:
             match = np.flatnonzero(np.core.defchararray.find(signal_labels, channel) != -1)
             if match.size > 0:
-                match_indx.append(match)
-        match_indx = np.unique(np.concatenate(match_indx))
-        return match_indx
-
-    """End Logan Monkey Patching"""
+                match_index.append(match)
+        match_index = np.unique(np.concatenate(match_index))
+        return match_index
 
     def fix_ch_names(self, verbose=False):
         valid = np.array(['channel', 'channels', 'bipolar_pair', 'bipolar_pairs'])

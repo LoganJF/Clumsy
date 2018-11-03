@@ -13,15 +13,15 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'Clumsy'
-DESCRIPTION = 'A collection of scripts from years 1-3'
+DESCRIPTION = 'A collection of scripts used in the Computational Memory Lab for timeseries analysis'
 URL = 'https://github.com/LoganJF/Clumsy'
 EMAIL = 'loganfickling@gmail.com'
 AUTHOR = 'Logan Fickling'
-REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.0.2'
+REQUIRES_PYTHON = '>=3.6.0' # TODO: Should Make Python 2 compatible
+VERSION = '0.0.3'
 
 # What packages are required for this module to be executed?
-REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas'
+REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas', 'six', 'Ipython', 'cmlreaders'
     # 'requests', 'maya', 'records',
 ]
 

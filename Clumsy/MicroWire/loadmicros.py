@@ -1,7 +1,5 @@
-# A SCRIPT TO ALLOW A USER TO LOAD MICROWIRE DATA!
-
+"""loadmicros.py A script to allow a user to load micro-wire data. Taken from: https://github.com/alafuzof/NeuralynxIO"""
 from __future__ import division
-
 import os
 import warnings
 import numpy as np
@@ -45,117 +43,37 @@ VOLT_SCALING = (1, u'V')
 MILLIVOLT_SCALING = (1000, u'mV')
 MICROVOLT_SCALING = (1000000, u'µV')
 
+def load_ncs(file_path, load_time=True, rescale_data=True, signal_scaling='mv',
+             #signal_scaling=MICROVOLT_SCALING,
+             ):
+    """Loads file as a Neuralynx (.ncs) continuous acquisition file and extract the content.
 
-def read_header(fid):
-    # Read the raw header data (16 kb) from the file object fid. Restores the position in the file object after reading.
-    pos = fid.tell()
-    fid.seek(0)
-    raw_hdr = fid.read(HEADER_LENGTH).strip(b'\0')
-    fid.seek(pos)
+    Parameters
+    ----------
+    file_path: str, ending in .ncs
+    load_time: bool, by default True, calculates the sample time points
+    rescale_data: bool, by default True, whether or not to scale the signal to signal_scaling
+    signal_scaling: str, must be:
+                'mv' for milli-volts
+                'uV' or 'µV' for micro-volts
+                'V' for volts
 
-    return raw_hdr
-
-
-def parse_header(raw_hdr):
-    # Parse the header string into a dictionary of name value pairs
-    hdr = dict()
-
-    # Decode the header as iso-8859-1 (the spec says ASCII, but there is at least one case of 0xB5 in some headers)
-    raw_hdr = raw_hdr.decode('iso-8859-1')
-
-    # Neuralynx headers seem to start with a line identifying the file, so
-    # let's check for it
-    hdr_lines = [line.strip() for line in raw_hdr.split('\r\n') if line != '']
-    if hdr_lines[0] != '######## Neuralynx Data File Header':
-        warnings.warn('Unexpected start to header: ' + hdr_lines[0])
-
-    # Try to read the original file path
-    try:
-        assert hdr_lines[1].split()[1:3] == ['File', 'Name']
-        hdr[u'FileName']  = ' '.join(hdr_lines[1].split()[3:])
-        # hdr['save_path'] = hdr['FileName']
-    except:
-        warnings.warn('Unable to parse original file path from Neuralynx header: ' + hdr_lines[1])
-
-    # Process lines with file opening and closing times
-    hdr[u'TimeOpened'] = hdr_lines[2][3:]
-    hdr[u'TimeOpened_dt'] = parse_neuralynx_time_string(hdr_lines[2])
-    hdr[u'TimeClosed'] = hdr_lines[3][3:]
-    hdr[u'TimeClosed_dt'] = parse_neuralynx_time_string(hdr_lines[3])
-
-    # Read the parameters, assuming "-PARAM_NAME PARAM_VALUE" format
-    for line in hdr_lines[4:]:
-        try:
-            name, value = line[1:].split()  # Ignore the dash and split PARAM_NAME and PARAM_VALUE
-            hdr[name] = value
-        except:
-            warnings.warn('Unable to parse parameter line from Neuralynx header: ' + line)
-
-    return hdr
-
-
-def read_records(fid, record_dtype, record_skip=0, count=None):
-    # Read count records (default all) from the file object fid skipping the first record_skip records. Restores the
-    # position of the file object after reading.
-    if count is None:
-        count = -1
-
-    pos = fid.tell()
-    fid.seek(HEADER_LENGTH, 0)
-    fid.seek(record_skip * record_dtype.itemsize, 1)
-    rec = np.fromfile(fid, record_dtype, count=count)
-    fid.seek(pos)
-
-    return rec
-
-
-def estimate_record_count(file_path, record_dtype):
-    # Estimate the number of records from the file size
-    file_size = os.path.getsize(file_path)
-    file_size -= HEADER_LENGTH
-
-    if file_size % record_dtype.itemsize != 0:
-        warnings.warn('File size is not divisible by record size (some bytes unaccounted for)')
-
-    return file_size / record_dtype.itemsize
-
-
-def parse_neuralynx_time_string(time_string):
-    # Parse a datetime object from the idiosyncratic time string in Neuralynx file headers
-    try:
-        tmp_date = [int(x) for x in time_string.split()[4].split('/')]
-        tmp_time = [int(x) for x in time_string.split()[-1].replace('.', ':').split(':')]
-        tmp_microsecond = tmp_time[3] * 1000
-    except:
-        warnings.warn('Unable to parse time string from Neuralynx header: ' + time_string)
-        return None
+    Returns
+    -------
+    ncs: array like object containing data
+    """
+    # Get scaling
+    global MILLIVOLT_SCALING, MICROVOLT_SCALING, VOLT_SCALING
+    # Logan futzing around
+    if signal_scaling in ('mv', u'mv'):
+        signal_scaling = MILLIVOLT_SCALING
+    elif signal_scaling in ('uV', 'µV', u'uV', u'µV'):
+        signal_scaling =  MICROVOLT_SCALING
+    elif signal_scaling in (u'V', 'V'):
+        signal_scaling = VOLT_SCALING
     else:
-        return datetime.datetime(tmp_date[2], tmp_date[0], tmp_date[1],  # Year, month, day
-                                 tmp_time[0], tmp_time[1], tmp_time[2],  # Hour, minute, second
-                                 tmp_microsecond)
+        raise TypeError('inputted scale could not be understood')
 
-
-def check_ncs_records(records):
-    # Check that all the records in the array are "similar" (have the same sampling frequency etc.
-    dt = np.diff(records['TimeStamp'])
-    dt = np.abs(dt - dt[0])
-    if not np.all(records['ChannelNumber'] == records[0]['ChannelNumber']):
-        warnings.warn('Channel number changed during record sequence')
-        return False
-    elif not np.all(records['SampleFreq'] == records[0]['SampleFreq']):
-        warnings.warn('Sampling frequency changed during record sequence')
-        return False
-    elif not np.all(records['NumValidSamples'] == 512):
-        warnings.warn('Invalid samples in one or more records')
-        return False
-    elif not np.all(dt <= 1):
-        warnings.warn('Time stamp difference tolerance exceeded')
-        return False
-    else:
-        return True
-
-
-def load_ncs(file_path, load_time=True, rescale_data=True, signal_scaling=MICROVOLT_SCALING):
     # Load the given file as a Neuralynx .ncs continuous acquisition file and extract the contents
     file_path = os.path.abspath(file_path)
     with open(file_path, 'rb') as fid:
@@ -194,11 +112,199 @@ def load_ncs(file_path, load_time=True, rescale_data=True, signal_scaling=MICROV
         ncs['time'] = times
         ncs['time_units'] = u'µs'
 
-    #assert (float(ncs['header']['SamplingFrequency']) == 1e6 / (np.unique(np.diff(ncs['timestamp']))/512.))
+    try:
+        assert (float(ncs['header']['SamplingFrequency']) == 1e6 / (np.unique(np.diff(ncs['timestamp']))/512.))
+
+    except AssertionError as e:
+        print(e)
+
+
     return ncs
 
 
+def read_header(fid):
+    """Reads the header of the file
+
+    Parameters
+    ----------
+    fid: path to the file
+
+    Returns
+    -------
+    raw_hdr: object, header file for Neural Lynx
+    """
+    # Read the raw header data (16 kb) from the file object fid. Restores the position in the file object after reading.
+    pos = fid.tell()
+    fid.seek(0)
+    raw_hdr = fid.read(HEADER_LENGTH).strip(b'\0')
+    fid.seek(pos)
+
+    return raw_hdr
+
+
+def parse_header(raw_hdr):
+    """
+
+    Parameters
+    ----------
+    raw_hdr
+
+    Returns
+    -------
+
+    """
+    # Parse the header string into a dictionary of name value pairs
+    hdr = dict()
+
+    # Decode the header as iso-8859-1 (the spec says ASCII, but there is at least one case of 0xB5 in some headers)
+    raw_hdr = raw_hdr.decode('iso-8859-1')
+
+    # Neuralynx headers seem to start with a line identifying the file, so
+    # let's check for it
+    hdr_lines = [line.strip() for line in raw_hdr.split('\r\n') if line != '']
+    if hdr_lines[0] != '######## Neuralynx Data File Header':
+        warnings.warn('Unexpected start to header: ' + hdr_lines[0])
+
+    # Try to read the original file path
+    try:
+        assert hdr_lines[1].split()[1:3] == ['File', 'Name']
+        hdr[u'FileName']  = ' '.join(hdr_lines[1].split()[3:])
+        # hdr['save_path'] = hdr['FileName']
+    except:
+        warnings.warn('Unable to parse original file path from Neuralynx header: ' + hdr_lines[1])
+
+    # Process lines with file opening and closing times
+    hdr[u'TimeOpened'] = hdr_lines[2][3:]
+    hdr[u'TimeOpened_dt'] = parse_neuralynx_time_string(hdr_lines[2])
+    hdr[u'TimeClosed'] = hdr_lines[3][3:]
+    hdr[u'TimeClosed_dt'] = parse_neuralynx_time_string(hdr_lines[3])
+
+    # Read the parameters, assuming "-PARAM_NAME PARAM_VALUE" format
+    for line in hdr_lines[4:]:
+        try:
+            name, value = line[1:].split()  # Ignore the dash and split PARAM_NAME and PARAM_VALUE
+            hdr[name] = value
+        except:
+            warnings.warn('Unable to parse parameter line from Neuralynx header: ' + line)
+
+    return hdr
+
+
+def read_records(fid, record_dtype, record_skip=0, count=None):
+    """
+
+    Parameters
+    ----------
+    fid
+    record_dtype
+    record_skip
+    count
+
+    Returns
+    -------
+
+    """
+    # Read count records (default all) from the file object fid skipping the first record_skip records. Restores the
+    # position of the file object after reading.
+    if count is None:
+        count = -1
+
+    pos = fid.tell()
+    fid.seek(HEADER_LENGTH, 0)
+    fid.seek(record_skip * record_dtype.itemsize, 1)
+    rec = np.fromfile(fid, record_dtype, count=count)
+    fid.seek(pos)
+
+    return rec
+
+
+def estimate_record_count(file_path, record_dtype):
+    """
+
+    Parameters
+    ----------
+    file_path
+    record_dtype
+
+    Returns
+    -------
+
+    """
+    # Estimate the number of records from the file size
+    file_size = os.path.getsize(file_path)
+    file_size -= HEADER_LENGTH
+
+    if file_size % record_dtype.itemsize != 0:
+        warnings.warn('File size is not divisible by record size (some bytes unaccounted for)')
+
+    return file_size / record_dtype.itemsize
+
+
+def parse_neuralynx_time_string(time_string):
+    """
+
+    Parameters
+    ----------
+    time_string
+
+    Returns
+    -------
+
+    """
+    # Parse a datetime object from the idiosyncratic time string in Neuralynx file headers
+    try:
+        tmp_date = [int(x) for x in time_string.split()[4].split('/')]
+        tmp_time = [int(x) for x in time_string.split()[-1].replace('.', ':').split(':')]
+        tmp_microsecond = tmp_time[3] * 1000
+    except:
+        warnings.warn('Unable to parse time string from Neuralynx header: ' + time_string)
+        return None
+    else:
+        return datetime.datetime(tmp_date[2], tmp_date[0], tmp_date[1],  # Year, month, day
+                                 tmp_time[0], tmp_time[1], tmp_time[2],  # Hour, minute, second
+                                 tmp_microsecond)
+
+
+def check_ncs_records(records):
+    """
+
+    Parameters
+    ----------
+    records : nd.array
+
+    Returns
+    -------
+
+    """
+    # Check that all the records in the array are "similar" (have the same sampling frequency etc.
+    dt = np.diff(records['TimeStamp'])
+    dt = np.abs(dt - dt[0])
+    if not np.all(records['ChannelNumber'] == records[0]['ChannelNumber']):
+        warnings.warn('Channel number changed during record sequence')
+        return False
+    elif not np.all(records['SampleFreq'] == records[0]['SampleFreq']):
+        warnings.warn('Sampling frequency changed during record sequence')
+        return False
+    elif not np.all(records['NumValidSamples'] == 512):
+        warnings.warn('Invalid samples in one or more records')
+        return False
+    elif not np.all(dt <= 1):
+        warnings.warn('Time stamp difference tolerance exceeded')
+        return False
+    else:
+        return True
+
 def load_nev(file_path):
+    """
+
+    Parameters
+    ----------
+    file_path
+
+    Returns
+    -------
+
+    """
     # Load the given file as a Neuralynx .nev event file and extract the contents
     file_path = os.path.abspath(file_path)
     with open(file_path, 'rb') as fid:
@@ -223,6 +329,7 @@ def load_nev(file_path):
 
 if __name__ == '__main__':
     from ptsa.data.timeseries import TimeSeries
+    #from Clumsy.timeseriesLF import TimeSeriesLF
     path = '/data/eeg/TJ035/raw/2011-12-21/nlx/CSC1.ncs'
     ncs = load_ncs(path)
     ts = TimeSeries(data=ncs['data'],
