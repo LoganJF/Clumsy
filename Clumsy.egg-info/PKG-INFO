@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: Clumsy
+Version: 0.0.4
+Summary: A collection of scripts used in the Computational Memory Lab for timeseries analysis
+Home-page: https://github.com/LoganJF/Clumsy
+Author: Logan Fickling
+Author-email: loganfickling@gmail.com
+License: UNKNOWN
+Description: A collection of scripts used in the Computational Memory Lab for timeseries analysis
+Platform: UNKNOWN
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
