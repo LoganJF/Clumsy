@@ -16,8 +16,8 @@ import numpy as np
 # from ptsa.data.timeseries import TimeSeries
 from Clumsy.timeseriesLF import TimeSeriesLF, TimeSeries
 from copy import deepcopy
-from Clumsy.Signal import HilbertFilter
-from Clumsy.Signal import check_stability
+from Clumsy.signal import HilbertFilter
+from Clumsy.signal import check_stability
 
 def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=-1):
     """Transform the data using different methods.
@@ -71,7 +71,7 @@ def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=
 
     filtfilt is zero-phase filtering, which doesn't shift the signal as it filters. Since the phase is zero at all frequencies, it is also linear-phase.
     Filtering backwards in time requires you to predict the future, so it can't be used in "online" real-life applications, only for offline processing
-    of recordings of Signal.
+    of recordings of signal.
     e.g.
     # Applies filter forward and backward in time
     imp_ff = signal.filtfilt(b, a, impulse)
