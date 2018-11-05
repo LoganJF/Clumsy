@@ -5,7 +5,7 @@ import warnings
 import numpy as np
 import datetime
 
-__all__ ['load_micros']
+__all__ = ['load_micros']
 
 HEADER_LENGTH = 16 * 1024  # 16 kilobytes of header
 

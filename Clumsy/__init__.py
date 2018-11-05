@@ -4,4 +4,3 @@ from .signal import *
 from .io import *
 from .Misc import *
 from .Sleep import *
-from .utils import *

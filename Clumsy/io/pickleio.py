@@ -14,7 +14,7 @@ except ImportError:
     print('Could not find rprlib cannot import repr')
     pass
 
-__all__ = ['Save_Data', 'Load_Data', 'total_size']
+__all__ = ['Save_Data', 'Load_Data', 'get_total_size']
 def Save_Data(Object, path):
     """Saves arbitrary objects using pickling to desired path
 
