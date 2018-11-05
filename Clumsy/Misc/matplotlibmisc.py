@@ -1,7 +1,9 @@
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from matplotlib import pyplot as plt
-matplotlib.cm
 import numpy as np
+
+__all__ = ['wes_palettes', 'shiftedColorMap', 'create_colormap', 'discrete_cmap','rgb_to_hex','hex_to_rgb', 'fill_between_stderr']
+
 wes_palettes = {
   'BottleRocket1' : ["#A42820", "#5F5647", "#9B110E", "#3F5151", "#4E2A1E", "#550307", "#0C1707"],
   'BottleRocket2' : ["#FAD510", "#CB2314", "#273046", "#354823", "#1E1E1E"],

@@ -1,7 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ac0df19-e5de-44e9-a542-06b909aca776" name="Default" comment="Changing organization in prep of 0.0.5 release&#10;&#10;SpectralAnalysis -&gt; Signal&#10;Create module Sleep etc." />
+    <list default="true" id="6ac0df19-e5de-44e9-a542-06b909aca776" name="Default" comment="Changing organization in prep of 0.0.5 release&#10;&#10;SpectralAnalysis -&gt; Signal&#10;Create module Sleep etc.">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy.egg-info/PKG-INFO" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy.egg-info/SOURCES.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy.egg-info/dependency_links.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy.egg-info/requires.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy.egg-info/top_level.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Clumsy/utils/transform_signal.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/EventDetectionandCreation/EdfWriting.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/EventDetectionandCreation/SharpWaveRipples.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/EventDetectionandCreation/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/GetData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/MicroWire/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/MicroWire/loadmicros.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/BigDataAssignment1.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/loadmat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/matplotlibmisc.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/misc.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/pickleio.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/polarplots.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Misc/timeserieshelper.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/OldStuff/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/OldStuff/polarplots.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/butterworth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/circlestats.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/fft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/guassiansmoothing.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/hilbert.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/notchfilter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/rolling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Signal/rootmeansquare.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/base.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/ripples.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/slowwaves.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/staging.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/Sleep/utils.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/butterworth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/circlestats.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/fft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/guassiansmoothing.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/hilbert.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/notchfilter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/rollingfunctions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/SpectralAnalysis/rootmeansquare.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/TimeSeriesFunctions/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/TimeSeriesFunctions/samplestotime.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/__version__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/io/EdfWriting.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/io/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/io/loadmicros.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/butterworth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/circlestats.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/fft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/guassiansmoothing.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/hilbert.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/notchfilter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/rolling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/signals/rootmeansquare.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/lib/Clumsy/timeseriesLF.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Clumsy-0.0.3-py2.py3-none-any.whl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Clumsy-0.0.3.tar.gz" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Clumsy-0.0.4-py3-none-any.whl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Clumsy-0.0.4-py3.7.egg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/Clumsy-0.0.4.tar.gz" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CML.iml" afterPath="$PROJECT_DIR$/.idea/CML.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clumsy/Misc/__init__.py" afterPath="$PROJECT_DIR$/Clumsy/Misc/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py" afterPath="$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Clumsy/__init__.py" afterPath="$PROJECT_DIR$/Clumsy/__init__.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,12 +89,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__version__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Clumsy/__version__.py">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+              <folding>
+                <element signature="e#139#148#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staging.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Clumsy/Sleep/staging.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="34" column="17" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+              <folding>
+                <element signature="e#858#902#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Clumsy/Misc/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+              <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="matplotlibmisc.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="128" lean-forward="false" selection-start-line="4" selection-start-column="128" selection-end-line="4" selection-end-column="128" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29,7 +139,7 @@
         <entry file="file://$PROJECT_DIR$/Clumsy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -49,28 +159,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="butterworth.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Clumsy/Signal/butterworth.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
-              <folding>
-                <element signature="e#79#97#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Clumsy/io/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pickleio.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Clumsy/io/pickleio.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,23 +170,11 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Clumsy/Signal/__init__.py">
+        <entry file="file://$PROJECT_DIR$/Clumsy/signal/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BigDataAssignment1.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Clumsy/Misc/BigDataAssignment1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -107,7 +183,7 @@
         <entry file="file://$PROJECT_DIR$/Clumsy/io/loadmat.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="122">
-              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="e#51#74#0" expanded="true" />
               </folding>
@@ -158,21 +234,22 @@
         <option value="$PROJECT_DIR$/Clumsy/GetData.py" />
         <option value="$PROJECT_DIR$/Clumsy/__version__.py" />
         <option value="$PROJECT_DIR$/Clumsy/Misc/BigDataAssignment1.py" />
-        <option value="$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py" />
         <option value="$PROJECT_DIR$/Clumsy/signals/butterworth.py" />
         <option value="$PROJECT_DIR$/Clumsy/Sleep/__init__.py" />
-        <option value="$PROJECT_DIR$/Clumsy/__init__.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/Clumsy/Sleep/visbrain_gui.py" />
         <option value="$PROJECT_DIR$/Clumsy/Misc/loadmat.py" />
         <option value="$PROJECT_DIR$/Clumsy/io/load_files.py" />
-        <option value="$PROJECT_DIR$/Clumsy/Sleep/staging.py" />
         <option value="$PROJECT_DIR$/Clumsy/io/EdfWriting.py" />
         <option value="$PROJECT_DIR$/Clumsy/io/loadmicros.py" />
         <option value="$PROJECT_DIR$/Clumsy/io/__init__.py" />
         <option value="$PROJECT_DIR$/Clumsy/io/pickleio.py" />
         <option value="$PROJECT_DIR$/Clumsy/Sleep/utils.py" />
         <option value="$PROJECT_DIR$/Clumsy/Signal/butterworth.py" />
+        <option value="$PROJECT_DIR$/Clumsy/Sleep/staging.py" />
+        <option value="$PROJECT_DIR$/Clumsy/Misc/__init__.py" />
+        <option value="$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py" />
+        <option value="$PROJECT_DIR$/Clumsy/__init__.py" />
       </list>
     </option>
   </component>
@@ -240,6 +317,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Clumsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Clumsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Clumsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Clumsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Misc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,20 +531,28 @@
       <option name="project" value="LOCAL" />
       <updated>1541435143687</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Changing organization in prep of 0.0.5 release&#10;&#10;SpectralAnalysis -&gt; Signal&#10;Create module Sleep etc.">
+      <created>1541436391150</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1541436391150</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1436" height="877" extended-state="1" />
+    <frame x="0" y="23" width="1436" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5159705" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34650856" sideWeight="0.4971335" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938075" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37313432" sideWeight="0.48402947" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.4938575" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22812052" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22812052" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32279316" sideWeight="0.4971335" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.4920635" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -504,16 +607,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Clumsy/io/loadmicros.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="62" column="42" lean-forward="false" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
-          <folding>
-            <element signature="e#122#153#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -524,14 +617,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/fft.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/fft.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/butterworth.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/butterworth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2505">
           <caret line="177" column="26" lean-forward="true" selection-start-line="177" selection-start-column="26" selection-end-line="177" selection-end-column="26" />
@@ -566,7 +662,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/rootmeansquare.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/rootmeansquare.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -593,7 +689,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Clumsy/TimeSeriesFunctions/samplestotime.py" />
     <entry file="file://$PROJECT_DIR$/Clumsy/MicroWire/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/notchfilter.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/notchfilter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -611,45 +707,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/rolling.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/rolling.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/hilbert.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/hilbert.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="46" column="24" lean-forward="false" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#18#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/guassiansmoothing.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/guassiansmoothing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-202">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/circlestats.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/circlestats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-185">
           <caret line="10" column="25" lean-forward="true" selection-start-line="9" selection-start-column="32" selection-end-line="10" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/rootmeansquare.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/rootmeansquare.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="33" lean-forward="true" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/fft.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/fft.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="12" column="14" lean-forward="false" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -667,23 +769,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-          <folding>
-            <element signature="e#139#148#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/anaconda2/envs/prelim/lib/python3.7/site-packages/Clumsy-0.0.4-py3.7.egg!/Clumsy/EventDetectionandCreation/SharpWaveRipples.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1544">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -703,29 +793,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1566">
-          <caret line="111" column="50" lean-forward="false" selection-start-line="111" selection-start-column="50" selection-end-line="111" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Clumsy/io/load_files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="870">
           <caret line="58" column="16" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Sleep/staging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#858#902#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -815,14 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Misc/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Clumsy/Misc/misc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -857,7 +921,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/butterworth.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/butterworth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
@@ -888,17 +952,17 @@
     <entry file="file://$PROJECT_DIR$/Clumsy/io/loadmat.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="e#51#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Clumsy/Signal/__init__.py">
+    <entry file="file://$PROJECT_DIR$/Clumsy/signal/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -911,10 +975,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+          <folding>
+            <element signature="e#139#148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Clumsy/Sleep/staging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="34" column="17" lean-forward="false" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+          <folding>
+            <element signature="e#858#902#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Clumsy/Misc/matplotlibmisc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="128" lean-forward="false" selection-start-line="4" selection-start-column="128" selection-end-line="4" selection-end-column="128" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Clumsy/Misc/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Clumsy/utils/transform_signal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2738">
+          <caret line="24" column="36" lean-forward="false" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Clumsy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
