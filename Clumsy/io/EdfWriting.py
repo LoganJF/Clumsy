@@ -2,6 +2,7 @@
 from ptsa.data.timeseries import TimeSeries
 from ptsa.data.filters import ButterworthFilter
 from pyedflib import EdfReader, EdfWriter
+import pyedflib
 import numpy as np
 
 __all__ = ['preprocess_raw_edf']

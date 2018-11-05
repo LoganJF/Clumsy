@@ -23,11 +23,12 @@ VERSION = __version__ # Updated in __version__.py
 
 # What packages are required for this module to be executed?
 REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy',
-            'xarray','pandas', 'six', 'Ipython',
+            'xarray','pandas', 'six',
             'cmlreaders', 'numba', 'visbrain',
     # 'requests', 'maya', 'records',
 ]
 
+#
 # What packages are optional?
 EXTRAS = {
     # 'fancy feature': ['django'],
@@ -46,7 +47,7 @@ try:
     with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = '\n' + f.read()
 
-except FileNotFoundError:
+except: # pragma no cover
     long_description = DESCRIPTION
 
 # Load the package's __version__.py module as a dictionary.
