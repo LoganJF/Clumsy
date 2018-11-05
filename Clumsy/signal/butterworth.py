@@ -1,7 +1,12 @@
 """butterworth.py script used for consctructing various Butterworth Filters"""
 import numpy as np
-from scipy.signal import (lfilter, filtfilt, sosfilt, sosfiltfilt, butter, tf2zpk)
-from collections import Sequence
+from scipy.signal import (filtfilt, sosfiltfilt, butter, tf2zpk)
+try:
+    from collections import Sequence
+except ImportError as e:
+    print('Import error from collections import Sequence')
+except Exception as e:
+    print(e)
 from copy import deepcopy
 import warnings
 from xarray import DataArray
@@ -9,8 +14,9 @@ from ptsa.data.timeseries import TimeSeries
 from ptsa.data.common import get_axis_index
 from ptsa.data.filters import BaseFilter
 import traits.api
+from Clumsy.timeseriesLF import TimeSeriesLF
 
-__all__ = ['butterworth_filter', 'ButterworthFilter']
+__all__ = ['butterworth_filter', 'ButterworthFilter', 'check_stability']
 
 
 def check_stability(b, a):
@@ -97,8 +103,16 @@ def butterworth_filter(data=None, freq=(1, 100), filt_type='bandpass',
     # If inputted data is a TimeSeries like object, we need to output it as the same type
     is_timeseries = True if issubclass(type(data), TimeSeries) else False
     if is_timeseries:
-        copy = deepcopy(data)
-        data = data.data
+        # Changing way this is implemented so that it uses less memory...
+
+        #copy = deepcopy(data)
+        #data = data.data
+        coords = data.coords
+        dims = data.dims
+        attrs = data.attrs
+        name = data.name
+        if sample_rate is None:
+            sample_rate = float(data['samplerate'].data)
 
     # Calculate Nyquist frequency to normalize frequency by
     nyquist = sample_rate / 2
@@ -129,8 +143,9 @@ def butterworth_filter(data=None, freq=(1, 100), filt_type='bandpass',
                                          correct_filter=correct_filter,
                                          dat=data, axis=axis)
     if is_timeseries:
-        copy.data = filtered_data
-        return copy
+        return TimeSeriesLF(data=filtered_data, coords=coords, dims=dims, attrs=attrs, name=name)
+        #copy.data = filtered_data
+        #return copy
     return filtered_data
 
 

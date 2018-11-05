@@ -3,7 +3,6 @@ from ptsa.data.readers.TalReader import TalReader
 from ptsa.data.readers import EEGReader
 from ptsa.data.filters import MonopolarToBipolarMapper
 from ptsa.data.filters import ButterworthFilter
-from ptsa.data.events import Events
 from ptsa.data.readers.IndexReader import JsonIndexReader
 
 

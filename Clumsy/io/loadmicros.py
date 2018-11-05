@@ -5,6 +5,8 @@ import warnings
 import numpy as np
 import datetime
 
+__all__ ['load_micros']
+
 HEADER_LENGTH = 16 * 1024  # 16 kilobytes of header
 
 NCS_SAMPLES_PER_RECORD = 512
@@ -326,6 +328,28 @@ def load_nev(file_path):
     nev['events'] = records[['pkt_id', 'TimeStamp', 'event_id', 'ttl', 'Extra', 'EventString']]
 
     return nev
+
+def load_micros(filepath):
+    """
+
+    Parameters
+    ----------
+    filepath: str, ending in .ncs
+              path to neuralynx cheetah file
+
+    Returns
+    -------
+    TimeSeries object containing requested data
+    """
+    from Clumsy import TimeSeriesLF
+    ncs = load_ncs(filepath)
+    ts = TimeSeriesLF(data=ncs['data'],
+                      dims=['time'],
+                      coords={'samplerate': ncs['header']['SamplingFrequency'],
+                              'time': ncs['time'],
+                              'channel': ncs['header']['AcqEntName']}, )
+    return ts
+
 
 if __name__ == '__main__':
     from ptsa.data.timeseries import TimeSeries

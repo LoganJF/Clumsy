@@ -20,7 +20,7 @@ def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, f
         Methods to calculate the PSD. Defaults to 'mean'.
             'mean' is the same as Welch's method (mean of STFT).
             'median' uses median of STFT instead of mean to minimize outlier effect.
-            'medfilt' filters the entire signals raw FFT with a median filter to smooth.
+            'medfilt' filters the entire signal raw FFT with a median filter to smooth.
     The next 3 parameters are only relevant for method = {'mean', 'median'}
     window : str or tuple or array_like, optional
         Desired window to use. Defaults to a Hann window.

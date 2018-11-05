@@ -4,6 +4,7 @@ from ptsa.data.filters import ButterworthFilter
 from pyedflib import EdfReader, EdfWriter
 import numpy as np
 
+__all__ = ['preprocess_raw_edf']
 
 def preprocess_raw_edf(file_path, correct_channels, save_path):
     """Given an edf filepath this will use partial string matches to remove any not matched channels (e.g DC channels etc) and notch filter
