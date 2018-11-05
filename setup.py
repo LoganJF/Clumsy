@@ -11,6 +11,7 @@ from shutil import rmtree
 
 from setuptools import find_packages, setup, Command
 
+from Clumsy.__version__ import __version__
 # Package meta-data.
 NAME = 'Clumsy'
 DESCRIPTION = 'A collection of scripts used in the Computational Memory Lab for timeseries analysis'
@@ -18,10 +19,12 @@ URL = 'https://github.com/LoganJF/Clumsy'
 EMAIL = 'loganfickling@gmail.com'
 AUTHOR = 'Logan Fickling'
 REQUIRES_PYTHON = '>=3.6.0' # TODO: Should Make Python 2 compatible
-VERSION = '0.0.3'
+VERSION = __version__ # Updated in __version__.py
 
 # What packages are required for this module to be executed?
-REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas', 'six', 'Ipython', 'cmlreaders'
+REQUIRED = ['pyedflib', 'mne', 'ptsa', 'scipy', 'numpy',
+            'xarray','pandas', 'six', 'Ipython',
+            'cmlreaders', 'numba', 'visbrain',
     # 'requests', 'maya', 'records',
 ]
 
@@ -49,7 +52,7 @@ except FileNotFoundError:
 # Load the package's __version__.py module as a dictionary.
 about = {}
 if not VERSION:
-    with open(os.path.join(here, NAME, '__version__.py')) as f:
+    with open(os.path.join(here, 'NAME__version__.py')) as f:
         exec(f.read(), about)
 else:
     about['__version__'] = VERSION

@@ -1,5 +1,6 @@
-from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from matplotlib import pyplot as plt
+matplotlib.cm
 import numpy as np
 wes_palettes = {
   'BottleRocket1' : ["#A42820", "#5F5647", "#9B110E", "#3F5151", "#4E2A1E", "#550307", "#0C1707"],
@@ -99,8 +100,8 @@ def create_colormap(colors=None, cmap_name=None, bins=10):
     if cmap_name is None:
         cmap_name = 'my_list'
 
-    cm = LinearSegmentedColormap.from_list(cmap_name, colors, N=bins)
-    return cm
+    colormap = LinearSegmentedColormap.from_list(cmap_name, colors, N=bins)
+    return colormap
 
 def rgb_to_hex(rgb):
     return '#%02x%02x%02x' % rgb
@@ -117,8 +118,8 @@ def discrete_cmap(N=8):
     cpool = [ '#bd2309', '#bbb12d', '#1480fa', '#14fa2f', '#000000',
               '#faf214', '#2edfea', '#ea2ec4', '#ea2e40', '#cdcdcd',
               '#577a4d', '#2e46c0', '#f59422', '#219774', '#8086d9' ]
-    cmap3 = col.ListedColormap(cpool[0:N], 'indexed')
-    cm.register_cmap(cmap=cmap3)
+    cmap3 = ListedColormap(cpool[0:N], 'indexed')
+    #cm.register_cmap(cmap=cmap3)
 
 
 def fill_between_stderr(arr):

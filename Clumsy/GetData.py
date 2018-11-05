@@ -11,15 +11,15 @@ __all__ = [
 ]
 
 def get_subjects(experiment):
-    """
+    """Returns an array of all subjects who participated in the experiment
 
     Parameters
     ----------
-    experiment
+    experiment: str, must be 'CatFR1', 'FR1', 'pyFR' or 'ltpFR2'
 
     Returns
     -------
-
+    All valid subjects
     """
     if experiment.lower() in ('catfr1', 'fr1'):
         dataframe = get_data_index("r1")
@@ -41,12 +41,14 @@ def get_subjects(experiment):
 
 
 def get_sessions(subject, experiment):
-    """
+    """For a given subject and experiment return an array of all valid sessions
 
     Parameters
     ----------
-    subject
-    experiment
+    subject: str, must be a valid pyFR or FR1 or catFR1 subject
+    experiment: str, must be a valid experiment.
+                Currently implemented experiments:
+                FR1, catFR1, pyFR
 
     Returns
     -------
@@ -63,15 +65,15 @@ def get_sessions(subject, experiment):
                          & (dataframe['subject'] == subject)]['session'].unique()
 
 def get_ram_experiments(subject):
-    """
+    """Given a subject from RAM returns the experiments
 
     Parameters
     ----------
-    subject
+    subject: str, RAM subject id to get experiments for
 
     Returns
     -------
-
+    all valid experiments for the subject
     """
     dataframe = get_data_index("r1")
     return dataframe[dataframe['subject']==subject]['experiment'].unique()
