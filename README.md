@@ -71,6 +71,4 @@ If you want to run the latest version of the code, you can install from git:
 
 Development status
 ------------------
-
-Issue tracker
--------------
+Beta testing currently 0.0.4
