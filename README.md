@@ -31,8 +31,8 @@ See 'Development status' below.
 
 Requirements
 ------------
-
-Requirements here
+'pyedflib', 'mne', 'ptsa', 'scipy', 'numpy', 'xarray','pandas', 'six', 
+'cmlreaders', 'numba', 'visbrain',
 
 
 Quick start
