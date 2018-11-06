@@ -19,13 +19,6 @@ def fib(n: int) -> Iterator[int]:
 ```
 See the documentation for more examples.
 
-For Python 2.7, the standard annotations are written as comments:
-```python
-def is_palindrome(s):
-    # type: (str) -> bool
-    return s == s[::-1]
-```
-
 Clumsy is in development; some features are missing and there are bugs.
 See 'Development status' below.
 
