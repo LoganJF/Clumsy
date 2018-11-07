@@ -24,7 +24,21 @@ import numpy as np
 from Clumsy.signal import psd, rolling_window_full
 
 
-__all__ = ['integrate', 'norm_by_integral', 'normalize_to_high', 'timeline', 'valid_band', 'get_VI']
+__all__ = [
+    'min_max_normalization',
+    'integrate',
+    'norm_by_integral',
+    'normalize_to_high',
+    'timeline',
+    'valid_band',
+    'get_VI'
+]
+
+
+def min_max_normalization(x, minimum, maximum):
+    # Normalize channels to between .0 and +1.0
+    y = (x - minimum) / (maximum - minimum)
+    return y
 
 def _get_VI(ts, window_len=30, overlap=0):
     """
