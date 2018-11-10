@@ -51,7 +51,7 @@ def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, f
     """
     is_timeseries = True if issubclass(type(x), TimeSeries) else False
     if (Fs is None and is_timeseries):
-        Fs = float(x.samplerate.data)
+        Fs = int(x.samplerate.data)
 
     if method in ('mean', 'median'):
         # welch-style spectrum (mean/median of STFT)
