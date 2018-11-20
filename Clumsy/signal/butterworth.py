@@ -1,6 +1,6 @@
 """butterworth.py script used for consctructing various Butterworth Filters"""
 import numpy as np
-from scipy.signal import (filtfilt, sosfiltfilt, butter, tf2zpk)
+from scipy.signal import (filtfilt, firwin, sosfiltfilt, butter, tf2zpk)
 try:
     from collections import Sequence
 except ImportError as e:
@@ -74,7 +74,7 @@ def butterworth_filter(data=None, freq=(1, 100), filt_type='bandpass',
 
     Parameters
     ----------
-    data: TimeSeriesX like
+    data: TimeSeries like
     freq: array-like or int/float depending on filt_type
     filt_type: filter type to use (e.g. 'pass', 'high', 'low', 'highpass',
                 'lowpass', 'bandpass', 'band', 'stop', 'bandstop')
@@ -147,7 +147,6 @@ def butterworth_filter(data=None, freq=(1, 100), filt_type='bandpass',
         #copy.data = filtered_data
         #return copy
     return filtered_data
-
 
 class ButterworthFilter(BaseFilter):
     """Applies Butterworth filter to a time series.
@@ -224,16 +223,10 @@ class ButterworthFilter(BaseFilter):
         filtered_timeseries.attrs = self.timeseries.attrs.copy()
         return filtered_timeseries
 
-
-from scipy.signal import (firwin, filtfilt)
-from ptsa.data.TimeSeriesX import TimeSeriesX
-from copy import deepcopy
-
-
 def FIR_bandpass_filter(data, lowcut, highcut, fs, order=1000, window='hanning'):
     """Applies a forward reverse FIR bandpass filter according to the parameters
     ----------
-    data : TimeSeriesX or array_like
+    data : TimeSeries or array_like
         The data we would like to apply a bandpass to
     lowcut : float or 1D array_like
         Low cutoff frequency of filter (expressed in the same units as `nyq`)
@@ -253,8 +246,8 @@ def FIR_bandpass_filter(data, lowcut, highcut, fs, order=1000, window='hanning')
 
     Returns
     -------
-    data_filt_ts: TimeSeriesX
-        Data filtered between lowcut and highcut as a TimeSeriesX object
+    data_filt_ts: TimeSeries
+        Data filtered between lowcut and highcut as a TimeSeries object
     data_filt: array_like
         Data filtered between lowcut and highcut as an array_like object
 
@@ -284,7 +277,7 @@ def FIR_bandpass_filter(data, lowcut, highcut, fs, order=1000, window='hanning')
     # -----------> Compute a forward/reverse bandpass filtering
     data_filt = filtfilt(b=band_pass_filt, a=[1], x=data)
 
-    # If we input a TimeSeriesX we should output a TimeSeriesX
+    # If we input a TimeSeries we should output a TimeSeries
     if issubclass(type(data), TimeSeries):
         data_filt_ts = deepcopy(data)
         data_filt_ts.data = data_filt
