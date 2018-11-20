@@ -1,0 +1,11 @@
+pyedflib
+mne
+ptsa
+scipy
+numpy
+xarray
+pandas
+six
+cmlreaders
+numba
+visbrain
