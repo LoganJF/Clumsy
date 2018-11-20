@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import zscore
 from numba import jit
 from ptsa.data.timeseries import TimeSeries
-#from Clumsy.Sleep import BaseDetector
+#from Clumsy.sleep import BaseDetector
 from .base import BaseDetector
 
 __all__ = ['find_consecutive_data', 'find_containing_intervals', 'chop_intervals', 'init_channel_events',

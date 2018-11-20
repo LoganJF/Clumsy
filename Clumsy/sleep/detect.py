@@ -5,6 +5,7 @@ from Clumsy import ButterworthFilter
 from .base import BaseDetector, jit_find_containing_intervals, find_consecutive_data
 
 __all__ = ['SpindleDetector', 'IEDDetector', 'RippleDetector']
+
 class SpindleDetector(BaseDetector):
     """
     """

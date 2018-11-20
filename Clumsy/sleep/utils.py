@@ -9,7 +9,8 @@ from numpy import (absolute, arange, argmax, argmin, around, asarray,
 from scipy.ndimage.filters import gaussian_filter, gaussian_filter1d
 from scipy.signal import (argrelmax, butter, cheby2, filtfilt,
                           fftconvolve, hilbert, periodogram, remez,
-                          sosfiltfilt, tukey, tf2zpk)
+                          sosfiltfilt, #tukey,
+                          tf2zpk)
 from scipy.fftpack import next_fast_len
 import warnings
 import numpy as np
