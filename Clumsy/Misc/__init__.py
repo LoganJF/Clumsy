@@ -1,2 +1,2 @@
-#from .matplotlibmisc import *
-#from misc import *
+from .matplotlibmisc import *
+from .misc import *

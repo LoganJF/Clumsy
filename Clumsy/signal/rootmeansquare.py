@@ -12,7 +12,7 @@ def rolling_window(arr, window):
 
     Parameters
     ----------
-    a: array, array to get windows of
+    arr: array, array to get windows of
     window: int, length of window
 
     Returns
@@ -40,6 +40,7 @@ def root_mean_square(arr, axis=-1):
     """
     # from numpy import (mean, sqrt, square)
     return sqrt(mean(square(arr), axis))
+
 
 
 def RMS_amplitude_detector_fast(arr, duration=.2, fs=100.):

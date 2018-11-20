@@ -2,6 +2,11 @@ import numpy as np
 from scipy.stats import zscore
 from numba import jit
 from ptsa.data.timeseries import TimeSeries
+#from Clumsy.Sleep import BaseDetector
+from .base import BaseDetector
+
+__all__ = ['find_consecutive_data', 'find_containing_intervals', 'chop_intervals', 'init_channel_events',
+           'jit_find_containing_intervals']
 
 def find_consecutive_data(data, stepsize=1):
     """Splits Data into a list of arrays where there is more than a single step of 1
@@ -9,7 +14,7 @@ def find_consecutive_data(data, stepsize=1):
     Parameters
     ----------
     data: np.array of zeroes and ones, the data to split
-    step_size: int, by default 1
+    stepsize: int, by default 1
 
     Returns
     -------
@@ -130,3 +135,9 @@ def init_channel_events(intervals, ch_index, path, subject='R1293P'):
     events['duration'] = events['stop'] - events['start']
     events = events.view(np.recarray)
     return events
+
+
+class Rippledetect(BaseDetector):
+
+    def __init__(self, time_series):
+        super(Rippledetect, self).__init__(time_series)

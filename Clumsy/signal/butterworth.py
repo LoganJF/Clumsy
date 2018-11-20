@@ -16,7 +16,7 @@ from ptsa.data.filters import BaseFilter
 import traits.api
 from Clumsy.timeseriesLF import TimeSeriesLF
 
-__all__ = ['butterworth_filter', 'ButterworthFilter', 'check_stability']
+__all__ = ['butterworth_filter', 'ButterworthFilter', 'check_stability', 'FIR_bandpass_filter']
 
 
 def check_stability(b, a):
@@ -223,3 +223,71 @@ class ButterworthFilter(BaseFilter):
         filtered_timeseries = TimeSeries(filtered_array, dims=dims, coords=coords_dict)
         filtered_timeseries.attrs = self.timeseries.attrs.copy()
         return filtered_timeseries
+
+
+from scipy.signal import (firwin, filtfilt)
+from ptsa.data.TimeSeriesX import TimeSeriesX
+from copy import deepcopy
+
+
+def FIR_bandpass_filter(data, lowcut, highcut, fs, order=1000, window='hanning'):
+    """Applies a forward reverse FIR bandpass filter according to the parameters
+    ----------
+    data : TimeSeriesX or array_like
+        The data we would like to apply a bandpass to
+    lowcut : float or 1D array_like
+        Low cutoff frequency of filter (expressed in the same units as `nyq`)
+        The values 0 and `nyq` must not be included in `lowcut`.
+    highcut : float or 1D array_like
+        High cutoff frequency of filter (expressed in the same units as `nyq`)
+        The values 0 and `nyq` must not be included in `highcut`.
+    fs : float or 1D array_like
+        Sampling frequency of the timeseries
+
+    Order : int or float, by default 1000
+        The order of the filter to compute. Increasing the value give better frequency
+        resolution of worse temporal resolution
+    window : string or tuple of string and parameter values, by default hanning.
+        Desired window to use. See `scipy.signal.get_window` for a list
+        of windows and required parameters.
+
+    Returns
+    -------
+    data_filt_ts: TimeSeriesX
+        Data filtered between lowcut and highcut as a TimeSeriesX object
+    data_filt: array_like
+        Data filtered between lowcut and highcut as an array_like object
+
+    References
+    ----------
+    https://gist.github.com/andrewgiessel/7589513
+    http://mpastell.com/2010/01/18/fir-with-scipy/
+    https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html#scipy.signal.filtfilt
+    """
+    # -----------> Initialize relevant parameters
+    n = order + 1  # Length of the filter coefficients, e.g. order + 1
+    nyq = 0.5 * fs  # The Nyquist rate of the signal.
+    low = lowcut / nyq
+    high = highcut / nyq
+
+    # -----------> Construct a Lowpass filter with a window
+    lowpass_filt = firwin(n, cutoff=low, window=window)
+
+    # -----------> Construct a Highpass filter with spectral inversion
+    highpass_filt = - firwin(n, cutoff=high, window=window)
+    highpass_filt[n // 2] = highpass_filt[n // 2] + 1
+
+    # -----------> Combine lowpass and highpass filters into a bandpass filter
+    band_pass_filt = - (lowpass_filt + highpass_filt)
+    band_pass_filt[n // 2] = band_pass_filt[n // 2] + 1
+
+    # -----------> Compute a forward/reverse bandpass filtering
+    data_filt = filtfilt(b=band_pass_filt, a=[1], x=data)
+
+    # If we input a TimeSeriesX we should output a TimeSeriesX
+    if issubclass(type(data), TimeSeries):
+        data_filt_ts = deepcopy(data)
+        data_filt_ts.data = data_filt
+        return data_filt_ts
+
+    return data_filt

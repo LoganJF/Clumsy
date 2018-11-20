@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-__all__ = ['find_nearest', 'round_down', ]
+__all__ = ['find_nearest', 'round_down']
 
 def find_nearest(array, value, return_index_not_value=True, is_sorted=True):
     """Given an array and a value, returns either the index or value of the nearest match

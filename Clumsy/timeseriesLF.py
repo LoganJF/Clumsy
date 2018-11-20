@@ -197,10 +197,15 @@ class TimeSeriesLF(TimeSeries):
                       'gender': '',
                       'startdate': datetime(2017, 8, 17, 1, 4, 43),
                       'birthdate': date(1951, 8, 2)}
-        writer.setHeader(header)
 
+        header = {'technician': 'tec1', 'recording_additional': 'recAdd1', 'patientname': 'pat1',
+                  'patient_additional': 'patAdd1', 'patientcode': 'code1', 'equipment': 'eq1',
+                  'admincode': 'admin1', 'gender': 1, 'startdate': datetime(2017, 1, 1, 1, 1, 1),
+                  'birthdate': date(1951, 8, 2)}
+        writer.setHeader(header)
         writer.setSignalHeaders(channel_info)
-        writer.writeSamples(data_list)
+        #writer.writeSamples(data_list)
+        writer.writePhysicalSamples(data_list)
 
         # Close writer/reader
         writer.close()
