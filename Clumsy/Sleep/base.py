@@ -4,13 +4,28 @@ from ptsa.data.common import get_axis_index
 from scipy.stats import zscore
 import numpy as np
 import pandas as pd
-from Clumsy import rolling_window_full, ButterworthFilter, find_consecutive_data
+from Clumsy import rolling_window_full, ButterworthFilter
 from numba import jit
 import traits.api
 
 __all__ = ['jit_find_containing_intervals', 'BaseDetector']
 
-# -----------> Helper Function
+# -----------> Helper Functions
+def find_consecutive_data(data, stepsize=1):
+    """Splits Data into a list of arrays where there is more than a single step of 1
+
+    Parameters
+    ----------
+    data: np.array of zeroes and ones, the data to split
+    stepsize: int, by default 1
+
+    Returns
+    -------
+    list of split data
+    """
+    return np.split(data, np.where(np.diff(data) != stepsize)[0] + 1)
+
+
 # Use numba to vastly improve the speed of this (x10) through the use of compiling
 @jit(nopython=True)
 def jit_find_containing_intervals(channel, duration):
