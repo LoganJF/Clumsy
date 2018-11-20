@@ -1,8 +1,8 @@
 """detect.py Module for detection of ripples, spindles, and inter-ictal discharges"""
 import numpy as np
 import pandas as pd
-from Clumsy import ButterworthFilter, find_consecutive_data
-from .base import BaseDetector, jit_find_containing_intervals
+from Clumsy import ButterworthFilter
+from .base import BaseDetector, jit_find_containing_intervals, find_consecutive_data
 
 __all__ = ['SpindleDetector', 'IEDDetector', 'RippleDetector']
 class SpindleDetector(BaseDetector):

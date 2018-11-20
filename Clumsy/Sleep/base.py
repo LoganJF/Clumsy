@@ -8,7 +8,7 @@ from Clumsy import rolling_window_full, ButterworthFilter
 from numba import jit
 import traits.api
 
-__all__ = ['jit_find_containing_intervals', 'BaseDetector']
+__all__ = ['jit_find_containing_intervals', 'BaseDetector', 'find_consecutive_data']
 
 # -----------> Helper Functions
 def find_consecutive_data(data, stepsize=1):
