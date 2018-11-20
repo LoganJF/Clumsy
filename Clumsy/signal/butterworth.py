@@ -141,7 +141,7 @@ def butterworth_filter(data=None, freq=(1, 100), filt_type='bandpass',
     # Apply the correct filter and unpacking inputs if necessary
     filtered_data = apply_correct_filter(filter_inputs=constructed_filter,
                                          correct_filter=correct_filter,
-                                         dat=data, axis=axis)
+                                         dat=np.array(data), axis=axis)
     if is_timeseries:
         return TimeSeriesLF(data=filtered_data, coords=coords, dims=dims, attrs=attrs, name=name)
         #copy.data = filtered_data
@@ -204,7 +204,7 @@ class ButterworthFilter(BaseFilter):
             The filtered time series
         """
         time_axis_index = get_axis_index(self.timeseries, axis_name='time')
-        filtered_array = butterworth_filter(data=self.timeseries,
+        filtered_array = butterworth_filter(data=np.array(self.timeseries),
                                             freq=self.freq_range,
                                             filt_type=self.filt_type,
                                             sample_rate=float(self.timeseries['samplerate']),
