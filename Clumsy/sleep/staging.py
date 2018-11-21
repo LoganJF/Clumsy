@@ -33,6 +33,10 @@ __all__ = [
     'valid_band',
     'get_VI'
 ]
+class VigilanceIndexPipeline(object):
+
+    def __init__(self):
+        pass
 
 
 def min_max_normalization(x, minimum, maximum):

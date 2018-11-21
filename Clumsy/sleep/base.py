@@ -142,23 +142,66 @@ class BaseDetector(traits.api.HasTraits):
         """
         return jit_find_containing_intervals(channel=channel, duration=duration)
 
-    ###### Thresholding Functions #####
-    def zscore_data(self, dim='time'):
-        """
+    @staticmethod
+    def find_intervals(boolean_arr, min_sample, max_sample, contacts_df=None):
+        """Find intervals where there is an amplitude and duration crossing
 
         Parameters
         ----------
-        dim: dimension to apply zscore over
-        inplace: bool, whether to modify in place or not
+        boolean_arr: np.array dtype=bool, shape = n chs x samples
+                     Array indicating True if valid amplitude threshold or False if not
+        min_sample: minimum time in samples to count as a valid duration interval
+        max_sample: int or None,
+                    minimum time in samples to count as a valid duration interval
+        contacts_df: CMLReader contacts data frame
 
         Returns
         -------
 
         """
-        axis = self._dim_to_axis(dim=dim)
-        zdata = zscore(self.time_series.data, axis=axis)
-        return zdata
 
+        try:
+            fs_roi = contacts_df['ind.region']
+            stein_roi = contacts_df['stein.region']
+            hemi = ['left' if x == -1 else 'right' for x in np.sign(contacts_df['ind.x'])]
+            channels = contacts_df['label']
+        except AttributeError:
+            fs_roi = ''
+            stein_roi = ''
+            hemi = ''
+            channels = ''
+        except Exception as e:
+            print(e)
+            fs_roi = ''
+            stein_roi = ''
+            hemi = ''
+            channels = ''
+
+        dataframe = []
+        for index, ch_arr in enumerate(boolean_arr):
+            start, stops = jit_find_containing_intervals(ch_arr, min_sample)
+            df = pd.DataFrame(start, columns=['start'])
+            try:
+                df['stop'] = stops
+            except ValueError as e:
+                if len(start) != len(stops):  # Should occur when none are found
+                    continue
+                print(e)
+            df['duration'] = df['stop'] - df['start']
+            df['channel'] = channels[index]
+            df['fs region'] = fs_roi[index]
+            df['hemisphere'] = hemi[index]
+            df['stein region'] = stein_roi[index]
+            if max_sample is not None:
+                df = df[df['duration'] < max_sample]
+            dataframe.append(df)
+        try:
+            return pd.concat(dataframe)
+        except ValueError as e:
+            print(e)
+            return dataframe
+
+    ###### Thresholding Functions #####
 
     def rootmeansquare(self, window, asteps=None):
         """Applies a moving root mean square of window seconds over timeseries
@@ -224,60 +267,3 @@ class BaseDetector(traits.api.HasTraits):
         #std = np.std(zdata, axis=axis)
         #threshold = mean + (std * threshold)
         return zdata > threshold
-
-
-class IEDDetector(BaseDetector):
-    """
-    """
-    # IED definitions
-
-    methods = {'buzsaki': {'thres_filtered': 2,
-                           'thres_unfiltered': 2,
-                           'freq_range': (25, 80)}
-
-               }
-
-    def __init__(self, time_series, event_type='ied', method='buzsaki'):
-        super(BaseDetector, self).__init__(time_series=time_series, event_type=event_type, method=method)
-        self.method_d = IEDDetector.methods[method]
-        self.frequency = self.method_d['freq_range']
-        return
-
-    def detect_ied(self):
-        ts = self.remove_linenoise(self.time_series, harmonic=2, line_noise=60)
-        ied = ts.filter_with(ButterworthFilter, freq_range=self.frequency,
-                             order=4, filt_type='pass', filter_output='sos')
-
-        thres_filtered = self.method_d['thres_filtered']
-        thres_unfiltered = self.method_d['thres_unfiltered']
-
-        # More than n times filtered data -> Keep
-        """Keep any time points that exceed the threshold of the filtered data"""
-        mean = np.mean(ied.data, 1)
-        std = np.std(ied.data, 1)
-        thres = mean + (thres_filtered * std)
-        thres = thres[:, None]
-        boolean_array = ied.data > thres
-
-        # Less than n times baseline -> Remove
-        """Discard any time points that are below the threshold of the unfiltered data"""
-        mean_raw = np.abs(ts).mean('time')
-        std_raw = np.abs(ts).std('time')
-        thres_raw = mean_raw.data + (thres_unfiltered * std_raw.data)
-        thres_raw = thres_raw[:, None]
-        bool_raw = self.time_series.data > thres_raw
-
-        return (bool_raw & boolean_array)
-
-    def detect(self):
-        boolean_arr = self.detect_ied()
-        dfs = []
-        for i, boolean_ch in enumerate(boolean_arr):
-            consec = find_consecutive_data(np.where(boolean_ch)[0])
-            consec = np.array([x[0] for x in consec])
-            consec = consec[np.append(True, np.diff(consec) > self._duration_to_samples(duration=1.))]
-            df = pd.DataFrame(consec, columns=['samples'])
-            df['channel'] = str(self.time_series.channels[i].data)
-            df['event'] = 'IED'
-            dfs.append(df)
-        return pd.concat(dfs)

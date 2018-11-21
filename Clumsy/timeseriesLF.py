@@ -56,6 +56,7 @@ class TimeSeriesLF(TimeSeries):
 
     """Start Logan Monkey Patching"""
 
+    # TODO: Change to automatic correct_channels as array
     @classmethod
     def from_edf(cls, filename, correct_channels=None, *args, **kwargs):
         """Takes a file located at filename and returns it as a TimeSeriesX object
@@ -230,6 +231,7 @@ class TimeSeriesLF(TimeSeries):
         match_index = np.unique(np.concatenate(match_index))
         return match_index
 
+    # TODO: Make it automatic
     def fix_ch_names(self, verbose=False):
         valid = np.array(['channel', 'channels', 'bipolar_pair', 'bipolar_pairs'])
         # Find out what the potential dimension name for the contacts is
@@ -268,3 +270,32 @@ class TimeSeriesLF(TimeSeries):
 
         filtered = filter_class(self, **kwargs).filter()
         return filtered
+
+    # TODO: Add in to_mne helper utility built in
+    def to_mne(timeseries, indicator=None, tmin=-1.):
+        """If indicator is passed it must be a 1d array of shape timeseries.events, and consist of
+        only 1s and 0s whereby 1 is an event and 0 is not"""
+        # Create MNE Dataset
+        ch_names = list(timeseries['channels'].data)
+        info = mne.create_info(ch_names, timeseries['samplerate'].data, ch_types='eeg')
+
+        # Reorganize data for MNE format
+        data = timeseries.transpose('events', 'channels', 'time')
+
+        # Create events array for MNE
+        mne_evs = np.empty([data['events'].shape[0], 3]).astype(int)
+        mne_evs[:, 0] = np.arange(data['events'].shape[0])
+        mne_evs[:, 1] = data['time'].shape[0]
+        mne_evs[:, 2] = 1
+        event_id = dict(event=1)
+
+        if indicator is not None:
+            mne_evs[:, 2] = indicator
+            event_id = dict(event=1, not_event=0)
+
+        tmin = data['time'].data[-1]
+        arr = mne.EpochsArray(np.array(data), info, mne_evs, tmin, event_id)
+        arr.set_eeg_reference(ref_channels=None)  # Set to average reference
+        arr.apply_proj()
+
+        return arr
