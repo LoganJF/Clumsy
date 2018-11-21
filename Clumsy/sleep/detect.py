@@ -451,7 +451,7 @@ class RippleDetector(BaseDetector):
         ripple_filt = ripple_filt.filter_with(HilbertFilter)
         ripple_filt.data = np.abs(ripple_filt)
         return ripple_filt
-    
+
     def ripple_filter_amplitude_envelope(self):
         return  self._ripple_filter_amplitude_envelope(ts=self.time_series, freq_range=self.frequency, order=self.order)
 
@@ -463,3 +463,47 @@ class RippleDetector(BaseDetector):
         min_sample, max_sample = .2, None
         min_sample = ripple_filt._TimeSeries__duration_to_samples(min_sample)
         df = BaseDetector.find_intervals(boolean_arr, min_sample, max_sample, contacts)
+
+
+"""
+Staresina_2018 -> Hierarchical nesting of slow oscillations, spindles and ripples in the human hippocampus during sleep
+
+https://www.nature.com/articles/nn.4119.pdf
+
+Event detection and extraction. SO, spindle and ripple events were identified independently for each participant and 
+channel based on established detection algorithms15,23. 
+
+SOs were detected as follows. First, data were filtered between 0.16–1.25 Hz (two-pass FIR bandpass filter, order = 3 
+cycles of the low frequency cut-off), and only  artifact-free data from NREM sleep stages 2–4 were used for event detection. 
+Second, all zero-crossings were  determined in the filtered signal, and event duration was determined for SO candidates 
+(that is, down-states followed by up-states) as time between two successive positive- to-negative zero-crossings for Cz 
+and two successive negative-to-positive zero-crossings for HC, respectively. Events that met the SO duration criteria 
+(minimum of 0.8 and maximum of 2 s, 0.5–1.25 Hz) entered the next step. Third, event amplitudes were determined 
+for the remaining SO candidates (trough-to-peak amplitude between two positive-to-negative zero crossing for Cz; 
+peak-to-trough amplitude between two negative-to-positive zero-crossing for HC). Events that also met the SO amplitude 
+criteria (≥75% percentile of SO candidate amplitudes, that is, the 25% of events with the largest amplitudes) were 
+considered SOs. Manual validation in a random sampling of the raw EEG data yielded good agreement between hand-scored 
+and algorithmically identified SOs, however with greater sensitivity of the automated algorithm for SOs that were less 
+pronounced against the background EEG activity. Finally, artifact-free epochs (−2.5 to +2.5 s) time-locked to the SO
+down-state in the filtered signal were extracted from the unfiltered raw signal for all events.
+
+Spindles were detected as follows. First, data were filtered between 12–16 Hz (two-pass FIR bandpass filter, order = 3 
+cycles of the low frequency cut-off), and only artifact-free data from NREM sleep stages 2–4 were used for event 
+detection. Second, the r.m.s. signal was calculated for the filtered signal using a moving average of 200 ms, and the 
+spindle amplitude criterion was defined as the 75% percentile of RMS values. Third, Whenever the signal exceeded this 
+threshold for more than 0.5 s but less than 3 s (duration criteria) a spindle event was detected. Again, manual 
+validation in a random sampling of the raw EEG data yielded good agreement between hand-scored and algorithmically 
+identified spindles, however with greater sensitivity of the automated algorithm for spindles that were less 
+pronounced against the background EEG activity. Finally, artifact-free epochs (−2.5 to +2.5 s) time-locked to the 
+maximum spindle trough in the filtered signal were extracted from the unfiltered raw signal for all events.
+
+
+Ripples were detected as follows. First, data were filtered between 80–100 Hz (two-pass FIR bandpass filter, order = 3 
+cycles of the low frequency cut-off), and only artifact-free data from NREM sleep stages 2–4 were used for event 
+detection. Second, the r.m.s. signal was calculated for the filtered signal using a moving average of 20 ms, and the 
+ripple amplitude criterion was defined as the 99% percentile of RMS values. Third, whenever the signal exceeded this 
+threshold for a minimum of 38 ms (encompassing ~3 cycles at 80 Hz) a ripple event was detected. In addition, we 
+required at least three discrete peaks or three discrete troughs to occur in the raw signal segment corresponding to 
+the above-threshold RMS segment. This was accomplished by identifying local maxima or minima in the respective raw 
+signal segments after applying a one-pass moving average filter
+"""
