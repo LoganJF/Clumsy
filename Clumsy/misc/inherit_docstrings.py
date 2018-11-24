@@ -26,6 +26,8 @@ http://code.activestate.com/recipes/578587-inherit-method-docstrings-without-bre
 from functools import partial
 
 
+__all__ = ['InheritableDocstrings']
+
 # Replace this with actual implementation from
 # http://code.activestate.com/recipes/577748-calculate-the-mro-of-a-class/
 # (though this will work for simple cases)
@@ -65,6 +67,44 @@ def _copy_ancestor_docstring(mro, fn):
 
 
 class InheritableDocstrings(type):
+    """Object to allow inheriting of docstrings
+    class Animal:
+        def move_to(self, dest):
+            '''Move to *dest*'''
+            pass
+
+
+    class Bird(Animal, metaclass=InheritableDocstrings):
+        @copy_ancestor_docstring
+        def move_to(self, dest):
+            self._fly_to(dest) # Why is this fly to? I get it's a bird but isn't it unresolved?
+
+
+    assert Animal.move_to.__doc__ == Bird.move_to.__doc__
+
+    # ----> Use with other decorators
+    class Animal:
+        def move_to(self, dest):
+            '''Move to *dest*'''
+            pass
+
+
+    def check_docstring(fn):
+        assert fn.__doc__ == Animal.move_to.__doc__
+        return fn
+
+
+    class Bird(Animal, metaclass=InheritableDocstrings):
+        @check_docstring
+        @copy_ancestor_docstring
+        def move_to(self, dest):
+            self._fly_to(dest)
+
+
+    assert Animal.move_to.__doc__ == Bird.move_to.__doc__
+    print(Animal.move_to.__doc__, Bird.move_to.__doc__)
+    """
+
     @classmethod
     def __prepare__(cls, name, bases, **kwds):
         classdict = super().__prepare__(name, bases, *kwds)

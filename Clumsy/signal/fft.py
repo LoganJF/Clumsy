@@ -1,8 +1,10 @@
 import numpy as np
-from scipy import signal
 from ptsa.data.common import get_axis_index
 from ptsa.data.timeseries import TimeSeries
-from Clumsy.timeseriesLF import TimeSeriesLF
+from scipy import signal
+
+from Clumsy.signal.timeseriesLF import TimeSeriesLF
+
 __all__ = ['psd']
 
 def psd(x, Fs=None, method='mean', window='hann', nperseg=None, noverlap=None, filtlen=1.):

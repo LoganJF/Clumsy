@@ -1,7 +1,18 @@
 import numpy as np
 import math
 
-__all__ = ['find_nearest', 'round_down', 'list_of_dict_to_dict']
+__all__ = ['fill_between_stderr','find_nearest', 'round_down', 'list_of_dict_to_dict']
+
+
+def fill_between_stderr(arr):
+    """
+    arr: array of all subjects, axis 0 = subjects
+    arr_tstat: array of plotting falls we'll use for the fillbetween
+    """
+    mean = np.nanmean(arr,axis=0)
+    std_err_mean = np.nanstd(arr,axis=0) / ( np.sqrt( len(arr) ) )
+    y1, y2 = np.array( (mean+std_err_mean) ), np.array( (mean-std_err_mean) )
+    return y1, y2
 
 def find_nearest(array, value, return_index_not_value=True, is_sorted=True):
     """Given an array and a value, returns either the index or value of the nearest match

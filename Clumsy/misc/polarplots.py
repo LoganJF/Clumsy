@@ -1,10 +1,14 @@
+import numpy as np
+from math import pi
+
+
 def degree_to_rad(angle_degree):
-    from math import pi
+    #from math import pi
     return (angle_degree * pi) / 180.
 
 
 def rad_to_degree(angle_rad):
-    from math import pi
+    #from math import pi
     return (angle_rad * 180.) / pi
 
 
@@ -65,8 +69,11 @@ def polar_chart(ts, electrode):
 
     Demo of bar plot on a polar axis.
     """
-    import numpy as np
-    import matplotlib.pyplot as plt
+    try:
+        import matplotlib.pyplot as plt
+    except Exception as e:
+        print(e)
+        return
 
     # Compute pie slices
     t = [0.0, 3.9269908169872414, 2.3561944901923448, 6.2831853071795862, 0.78539816339744828,

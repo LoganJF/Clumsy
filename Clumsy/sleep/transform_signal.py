@@ -1,25 +1,23 @@
 """Contains utility functions used in analysis of sleep data"""
 
-from logging import getLogger
-from numpy import (absolute, arange, argmax, argmin, around, asarray,
-                   concatenate, cos, diff, exp, empty, floor, histogram,
-                   hstack, insert, invert, log10, logical_and, mean, median,
-                   nan, ones, percentile, pi, ptp, real, sqrt, square, std,
-                   vstack, where, zeros)
-from scipy.ndimage.filters import gaussian_filter, gaussian_filter1d
-from scipy.signal import (argrelmax, butter, cheby2, filtfilt,
-                          fftconvolve, hilbert, periodogram, remez,
-                          sosfiltfilt, #tukey,
-                          tf2zpk)
-from scipy.fftpack import next_fast_len
-import warnings
-import numpy as np
-# from ptsa.data.timeseries import TimeSeries
-from Clumsy.timeseriesLF import TimeSeriesLF, TimeSeries
 from copy import deepcopy
+
+import numpy as np
+from numpy import (absolute, arange, around, asarray,
+                   exp, empty, hstack, mean, ones, pi, zeros)
+from scipy.fftpack import next_fast_len
+from scipy.ndimage.filters import gaussian_filter, gaussian_filter1d
+from scipy.signal import (butter, cheby2, filtfilt,
+                          fftconvolve, hilbert, remez,
+                          sosfiltfilt,  # tukey,
+                          )
+
 from Clumsy.signal import HilbertFilter
 from Clumsy.signal import check_stability
+# from ptsa.data.timeseries import TimeSeries
+from Clumsy.signal.timeseriesLF import TimeSeries
 
+__all__ = ['transform_signal']
 def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=-1):
     """Transform the data using different methods.
 
@@ -307,29 +305,24 @@ def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=
 
         if 'moving_covar' == method:  #### NEEDS UPDATE ####
             raise NotImplementedError('{} has not been implemented yet'.format(method))
-            return
 
         if 'moving_power_ratio' == method:  #### NEEDS UPDATE ####
             raise NotImplementedError('{} has not been implemented yet'.format(method))
-            return
-            freq1 = method_opt['freq_narrow']
-            freq2 = method_opt['freq_broad']
-            fft_dur = method_opt['fft_dur']
+            # freq1 = method_opt['freq_narrow']
+            # freq2 = method_opt['freq_broad']
+            # fft_dur = method_opt['fft_dur']
 
         if 'moving_sd' == method:  #### NEEDS UPDATE ####
             raise NotImplementedError('{} has not been implemented yet'.format(method))
-            return
 
         if 'moving_zscore' == method:  #### NEEDS UPDATE ####
             raise NotImplementedError('{} has not been implemented yet'.format(method))
-            return
-            pcl_range = method_opt['pcl_range']
+            #pcl_range = method_opt['pcl_range']
 
         if method in ['moving_rms', 'moving_ms']:  #### NEEDS UPDATE ####
             raise NotImplementedError('{} has not been implemented yet'.format(method))
-            return
-            if method == 'moving_rms':
-                pass
+            #if method == 'moving_rms':
+                #pass
 
     if 'cdemod' == method:  ### Fack this needs to be fixed#### Apply to nD
         carr_freq = method_opt['freq']
@@ -339,48 +332,47 @@ def transform_signal(dat, method, s_freq=None, method_opt=None, dat2=None, axis=
 
     if 'morlet' == method:  #### NEEDS UPDATE ####
         raise NotImplementedError('{} has not been implemented yet consider using ptsa instead'.format(method))
-        return
-        f0 = method_opt['f0']
-        sd = method_opt['sd']
-        dur = method_opt['dur']
+        #f0 = method_opt['f0']
+        #sd = method_opt['sd']
+        #dur = method_opt['dur']
 
-        wm = _wmorlet(f0, sd, s_freq, dur)
-        dat = absolute(fftconvolve(dat, wm, mode='same'))
+        #wm = _wmorlet(f0, sd, s_freq, dur)
+        #dat = absolute(fftconvolve(dat, wm, mode='same'))
 
     if 'smooth' == method:  #### NEEDS UPDATE ####
         raise NotImplementedError('{} has not been implemented yet'.format(method))
-        return
+    """
 
-        dur = method_opt['dur']
-        win = method_opt['win']
+    dur = method_opt['dur']
+    win = method_opt['win']
 
-        if 'flat' == win:
-            flat = ones(int(dur * s_freq))
-            H = flat / sum(flat)
-        elif 'triangle' == win:
-            T = int(dur * s_freq / 2)
-            a = arange(T, 0, -1)
+    if 'flat' == win:
+        flat = ones(int(dur * s_freq))
+        H = flat / sum(flat)
+    elif 'triangle' == win:
+        T = int(dur * s_freq / 2)
+        a = arange(T, 0, -1)
 
-            H = hstack([a[-1:0:-1], a])
-            H = H / sum(H)
+        H = hstack([a[-1:0:-1], a])
+        H = H / sum(H)
 
-        dat = fftconvolve(dat, H, mode='same')
-
+    dat = fftconvolve(dat, H, mode='same')
+    """
     if 'wavelet_real' == method:  #### NEEDS UPDATE ####
         raise NotImplementedError('{} has not been implemented yet consider using ptsa instead'.format(method))
-        return
-        freqs = method_opt['freqs']
-        dur = method_opt['dur']
-        width = method_opt['width']
-        win = int(method_opt['win'] * s_freq)
+    """
+    freqs = method_opt['freqs']
+    dur = method_opt['dur']
+    width = method_opt['width']
+    win = int(method_opt['win'] * s_freq)
 
-        wm = _realwavelets(s_freq, freqs, dur, width)
-        tfr = empty((dat.shape[0], wm.shape[0]))
-        for i, one_wm in enumerate(wm):
-            x = abs(fftconvolve(dat, one_wm, mode='same'))
-            tfr[:, i] = fftconvolve(x, tukey(win), mode='same')
-        dat = mean(tfr, axis=1)
-
+    wm = _realwavelets(s_freq, freqs, dur, width)
+    tfr = empty((dat.shape[0], wm.shape[0]))
+    for i, one_wm in enumerate(wm):
+        x = abs(fftconvolve(dat, one_wm, mode='same'))
+        tfr[:, i] = fftconvolve(x, tukey(win), mode='same')
+    dat = mean(tfr, axis=1)
+    """
     if is_timeseries:
         copy.data = dat
         return copy

@@ -14,7 +14,7 @@ from ptsa.data.timeseries import TimeSeries
 from ptsa.data.common import get_axis_index
 from ptsa.data.filters import BaseFilter
 import traits.api
-from Clumsy.timeseriesLF import TimeSeriesLF
+from Clumsy.signal.timeseriesLF import TimeSeriesLF
 
 __all__ = ['butterworth_filter', 'ButterworthFilter', 'check_stability', 'FIR_bandpass_filter']
 

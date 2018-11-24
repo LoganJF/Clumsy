@@ -1,14 +1,23 @@
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from matplotlib import pyplot as plt
+try:
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+    from matplotlib import pyplot as plt
+except ImportError as e:
+    print('Encountering ImportErrors due to issues with python package matplotlib',
+          'not playing nice with an OS X background',
+          '\nAttempting to fix...')
+    plt = None
+    LinearSegmentedColormap = None
+    ListedColormap = None
+    print('Fixed')
 import numpy as np
 
 __all__ = ['wes_palettes',
            'shiftedColorMap',
            'create_colormap',
-           'discrete_cmap',
+           'discrete_colormap',
            'rgb_to_hex',
            'hex_to_rgb',
-           'fill_between_stderr']
+           ]
 
 wes_palettes = {
   'BottleRocket1' : ["#A42820", "#5F5647", "#9B110E", "#3F5151", "#4E2A1E", "#550307", "#0C1707"],
@@ -30,7 +39,6 @@ wes_palettes = {
   'GrandBudapest2' : ["#E6A0C4", "#C6CDF7", "#D8A499", "#7294D4"],
   'IsleofDogs1' : ["#9986A5", "#79402E", "#CCBA72", "#0F0D0E", "#D9D0D3", "#8D8680"],
   'IsleofDogs2' : ["#EAD3BF", "#AA9486", "#B6854D", "#39312F", "#1C1718"]}
-
 
 def shiftedColorMap(cmap, start=0, midpoint=0.5, stop=1.0, name='shiftedcmap'):
     '''
@@ -101,12 +109,12 @@ def create_colormap(colors=None, cmap_name=None, bins=10):
 
     """
     if colors is None:
+        # cmap_name = 'MoonriseKingdomCustom'
         # colors = ['#cb654f', '#d3b1a7', '#cfcb9c', '#8cbea3', '#dfba47',
         # '#fad77b', '#cdc08c','#9c964a', '#f4b5bd', '#86d4e4']
         colors = ["#FF0000", "#00A08A", "#F2AD00", "#F98400", "#5BBCD6",
                   "#E1BD6D", "#EABE94", "#0B775E", "#35274A", "#F2300F"]
         if cmap_name is None:
-            # cmap_name = 'MoonriseKingdomCustom'
             cmap_name = 'Rushmore1'
     if cmap_name is None:
         cmap_name = 'my_list'
@@ -125,23 +133,14 @@ def hex_to_rgb(value):
     return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
 
-def discrete_cmap(N=8):
-    """create a colormap with N (N<15) discrete colors and register it"""
+def discrete_colormap(color_pool = None, N=8):
+    """create a color map with N (N<15) discrete colors and register it"""
     # define individual colors as hex values
-    cpool = [ '#bd2309', '#bbb12d', '#1480fa', '#14fa2f', '#000000',
-              '#faf214', '#2edfea', '#ea2ec4', '#ea2e40', '#cdcdcd',
-              '#577a4d', '#2e46c0', '#f59422', '#219774', '#8086d9' ]
-    cmap3 = ListedColormap(cpool[0:N], 'indexed')
-    #cm.register_cmap(cmap=cmap3)
+    if color_pool is None:
 
+        color_pool = [ '#bd2309', '#bbb12d', '#1480fa', '#14fa2f', '#000000',
+                      '#faf214', '#2edfea', '#ea2ec4', '#ea2e40', '#cdcdcd',
+                      '#577a4d', '#2e46c0', '#f59422', '#219774', '#8086d9' ]
 
-def fill_between_stderr(arr):
-    """
-    arr: array of all subjects, axis 0 = subjects
-    arr_tstat: array of plotting falls we'll use for the fillbetween
-    """
-    mean = np.nanmean(arr,axis=0)
-    std_err_mean = np.nanstd(arr,axis=0) / ( np.sqrt( len(arr) ) )
-    y1, y2 = np.array( (mean+std_err_mean) ), np.array( (mean-std_err_mean) )
-    return y1, y2
-    #plt.fill_between(y1=y1,y2=y2, x=x_axis, color = 'blue', alpha=.25)
+    color_map = ListedColormap(color_pool[0:N], 'indexed')
+    return color_map
